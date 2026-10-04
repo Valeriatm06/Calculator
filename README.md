@@ -39,60 +39,13 @@ This project adopts the **C4 Model** (inspired by Simon Brown's reference specif
 
 ### 1. C4 Container Diagram (Level 2)
 
-```mermaid
-graph TD
-    User(["👤 User<br/>[Person]"])
-    
-    subgraph CalculatorSystem ["Calculator System [Software System — Docker Compose]"]
-        StaticContent["📁 Static Content<br/>[Container: Nginx Web Server]<br/>Port: 3000"]
-        WebUI["💻 Web UI<br/>[Container: React 19 & TypeScript]<br/>Port: 3000"]
-        BackendAPI["⚙️ > _ Backend API<br/>[Container: Go 1.22+ and net/http]<br/>Port: 8080"]
-        SessionStore[("💾 Session Store<br/>[Container: Browser LocalStorage]")]
-    end
+<img width="1003" height="743" alt="Diagrama sin título-Container View_ Calculator System drawio (1)" src="https://github.com/user-attachments/assets/25600ed0-bf17-4b5e-96bf-5d474ffc6d61" />
 
-    Swagger["📖 API Documentation<br/>[Swagger UI / OpenAPI 3.0]<br/>:8080/swagger"]
-
-    User -.->|"Loads the UI from [HTTP:3000]"| StaticContent
-    User -.->|"Enters calculations & views results using"| WebUI
-    User -.->|"Explores & tests REST API using [HTTP:8080/swagger]"| Swagger
-    StaticContent -.->|"Delivers bundle to"| WebUI
-    WebUI -.->|"Makes API requests to [JSON/HTTP:8080]"| BackendAPI
-    WebUI -.->|"Reads from & writes to [Browser API]"| SessionStore
-    BackendAPI -.->|"Serves interactive OpenAPI docs at /swagger"| Swagger
-```
 
 ### 2. C4 Dynamic Diagram: Calculation Request Flow
-
 This diagram illustrates the direct, step-by-step lifecycle of an arithmetic calculation request (e.g., `50 + 25 =`):
 
-```mermaid
-sequenceDiagram
-    autonumber
-    actor User as 👤 User
-    participant UI as 💻 Web UI (React 19)
-    participant API as ⚙️ Backend API (Go net/http)
-    participant Engine as 🧮 Domain Engine (Go Core)
-    participant Store as 💾 Session Store (LocalStorage)
-
-    User->>UI: 1. Enters "50 + 25 =" via clicks or physical keyboard
-    UI->>API: 2. POST /api/v1/calculate {"operation": "add", "a": 50, "b": 25}
-    Note over API: Structured logger captures latency; CORS validates origin
-    API->>Engine: 3. calculator.Add(50, 25)
-    Note over Engine: Computes sum & sanitizes IEEE-754 float precision
-    Engine-->>API: 4. Returns exact sanitized result: 75.0
-    API-->>UI: 5. HTTP 200 OK {"success": true, "result": 75}
-    UI->>Store: 6. Appends "50 + 25 = 75" to calculation history
-    UI-->>User: 7. Renders "75" in bold with running formula "50 + 25 ="
-```
-
-### Editable Architecture Diagrams in Draw.io (`architecture.drawio`)
-
-The diagrams in **[`architecture.drawio`](./architecture.drawio)** (and mirrored at **[`docs/architecture.drawio`](./docs/architecture.drawio)**) are styled strictly after Simon Brown's official C4 model (clean white fills, thin colored outlines, dashed connectors with centered labels, in English):
-
-- **Page 1: `Container View: Calculator System`**: Shows the User, System Boundary, Static Content (Nginx), Web UI (React 19), Backend API (Go), Session Store (LocalStorage), and API Documentation (Swagger UI).
-- **Page 2: `Dynamic View: Request Flow`**: Shows the clean, direct 7-step horizontal request lifecycle from user keystroke to Go domain execution and display update.
-
-You can open and edit [`architecture.drawio`](./architecture.drawio) directly in **[app.diagrams.net](https://app.diagrams.net/)** or in VS Code with the Draw.io Integration extension.
+<img width="1032" height="354" alt="Diagrama sin título-Dynamic View_ Request Flow drawio (1)" src="https://github.com/user-attachments/assets/1ba9bf52-3b0f-48c6-b15f-95a1b01b0fba" />
 
 ---
 
@@ -118,63 +71,6 @@ You can open and edit [`architecture.drawio`](./architecture.drawio) directly in
   - One-click reloading of previous results into the active display.
 - **Robust Validation & Error Handling**:
   - Real-time handling of division by zero, negative square roots, numeric overflow, and malformed inputs.
-
----
-
-## Project Structure
-
-```text
-calculator-app/
-├── backend/                        # Go Microservice
-│   ├── cmd/
-│   │   └── api/
-│   │       └── main.go             # Application entrypoint & graceful shutdown
-│   ├── internal/
-│   │   ├── calculator/             # Core calculation domain logic
-│   │   │   ├── errors.go           # Domain-specific errors
-│   │   │   ├── service.go          # Arithmetic implementation & sanitization
-│   │   │   └── service_test.go     # Domain unit tests (100% coverage)
-│   │   ├── handler/                # HTTP presentation layer
-│   │   │   ├── calculator.go       # REST handlers & route registration
-│   │   │   ├── calculator_test.go  # HTTP integration tests (84.5% coverage)
-│   │   │   └── response.go         # Standard JSON response utilities
-│   │   └── middleware/             # HTTP middlewares
-│   │       ├── cors.go             # Cross-Origin Resource Sharing
-│   │       ├── logger.go           # Structured latency/status logger
-│   │       └── middleware_test.go  # Middleware tests (100% coverage)
-│   ├── Dockerfile                  # Multi-stage minimal Alpine image
-│   ├── go.mod                      # Go module definition
-│   └── .gitignore
-│
-├── frontend/                       # React 19 + TypeScript Frontend
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Display.tsx         # Equation and main numeric display
-│   │   │   ├── Header.tsx          # Branding & API health indicator
-│   │   │   ├── HistoryPanel.tsx    # Session history list & clear actions
-│   │   │   └── Keypad.tsx          # Calculator buttons layout
-│   │   ├── hooks/
-│   │   │   ├── useCalculator.ts    # Calculator state machine & closures
-│   │   │   └── useCalculator.test.ts # State hook unit tests
-│   │   ├── services/
-│   │   │   ├── api.ts              # Fetch client with typed error wrappers
-│   │   │   └── api.test.ts         # API client unit tests
-│   │   ├── types/
-│   │   │   └── calculator.ts       # Shared TypeScript interfaces & types
-│   │   ├── App.tsx                 # Root component & keyboard bindings
-│   │   ├── App.test.tsx            # UI Integration tests
-│   │   ├── index.css               # Modern responsive styling
-│   │   └── main.tsx                # React entrypoint
-│   ├── Dockerfile                  # Multi-stage Nginx container
-│   ├── nginx.conf                  # Nginx proxy & SPA config
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── vite.config.ts              # Vite & Vitest configuration
-│
-├── docker-compose.yml              # Single-command full-stack deployment
-├── PROMPTS.md                      # AI prompts log (per instructions)
-└── README.md                       # Documentation & API specifications
-```
 
 ---
 
@@ -223,7 +119,7 @@ go run ./cmd/api
 
 The Go microservice will start on port `8080`:
 ```text
-🚀 Calculator API server started on port 8080
+Calculator API server started on port 8080
 Health check: http://localhost:8080/api/v1/health
 Calculate endpoint: http://localhost:8080/api/v1/calculate
 ```
@@ -281,7 +177,7 @@ npm test
 
 ## REST API Documentation & Examples
 
-### ⚡ Interactive Swagger UI & OpenAPI 3.0 Documentation
+### Interactive Swagger UI & OpenAPI 3.0 Documentation
 
 The microservice includes an embedded **Swagger UI** for interactive exploration and testing:
 - **Swagger UI Web Interface**: [http://localhost:8080/swagger](http://localhost:8080/swagger)
@@ -485,7 +381,7 @@ curl -X POST http://localhost:8080/api/v1/calculate \
 1. **Floating-Point Representation Sanitization**:
    Standard IEEE-754 floating-point operations can generate precision anomalies (e.g. `0.1 + 0.2 = 0.30000000000000004`). The Go calculator service contains an explicit precision sanitizer (`math.Round(val*1e12)/1e12`) that prevents micro-rounding errors while preserving high numeric accuracy.
 2. **Standard Library in Go**:
-   Rather than introducing external HTTP frameworks like Gin or Fiber, the backend uses Go's standard library `net/http` with enhanced pattern-matching routes (`"POST /api/v1/calculate"`), reducing dependencies and maintaining high throughput.
+   The backend uses Go's standard library `net/http` with enhanced pattern-matching routes (`"POST /api/v1/calculate"`), reducing dependencies and maintaining high throughput.
 3. **Graceful Shutdown**:
    The Go HTTP server listens for operating system termination signals (`SIGINT`, `SIGTERM`) and drains in-flight requests with a 15-second grace period before exiting.
 4. **Resilient React State Machine**:
