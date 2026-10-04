@@ -41,7 +41,7 @@ This project adopts the **C4 Model** (inspired by Simon Brown's reference specif
 
 ```mermaid
 graph TD
-    User(["👤 User / Evaluator<br/>[Person]"])
+    User(["👤 User<br/>[Person]"])
     
     subgraph CalculatorSystem ["Calculator System [Software System — Docker Compose]"]
         StaticContent["📁 Static Content<br/>[Container: Nginx Web Server]<br/>Port: 3000"]
