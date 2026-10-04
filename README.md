@@ -1,7 +1,7 @@
 # Full-Stack Calculator Application (React + Go)
 
 [![Go Tests](https://img.shields.io/badge/Go_Backend_Coverage-96%25-brightgreen.svg)]()
-[![Frontend Tests](https://img.shields.io/badge/React_Tests-17_Passing-blue.svg)]()
+[![Frontend Tests](https://img.shields.io/badge/React_Tests-18_Passing-blue.svg)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue.svg)]()
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)]()
 
@@ -233,7 +233,7 @@ npm test
 
 **Results:**
 - **3 test files passed** (`api.test.ts`, `useCalculator.test.ts`, `App.test.tsx`)
-- **17 total unit and integration tests passed** (100% pass rate)
+- **18 total unit and integration tests passed** (100% pass rate)
 
 ---
 
