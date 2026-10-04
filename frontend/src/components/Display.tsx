@@ -16,10 +16,12 @@ export const Display: React.FC<DisplayProps> = ({
 }) => {
   return (
     <div className="calculator-display" data-testid="calculator-display">
-      <div className="display-equation" data-testid="display-equation">
+      {/* Upper line: Equation / Expression (as seen in the screenshot) */}
+      <div className="display-expression" data-testid="display-equation">
         {equation || '\u00A0'}
       </div>
 
+      {/* Main line: Current Value / Result */}
       <div className="display-main">
         {loading && (
           <Loader2
