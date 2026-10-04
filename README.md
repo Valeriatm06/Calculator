@@ -35,59 +35,64 @@ A modern, production-grade full-stack calculator application featuring a **Go RE
 
 ## Architecture & Design Rationale (C4 Model)
 
-This project adopts the **C4 Model** for architectural visualization, focusing on a clean separation of concerns and an intuitive, direct understanding of how a request flows through the system.
+This project adopts the **C4 Model** (inspired by Simon Brown's reference specification) for clean, high-contrast, uncluttered architectural visualization. It focuses on white background containers with thin colored outlines and direct request flow.
 
 ### 1. C4 Container Diagram (Level 2)
 
 ```mermaid
-graph LR
-    User(["👤 Usuario / Evaluador<br/>[Persona]"])
+graph TD
+    User(["👤 User / Evaluator<br/>[Person]"])
     
-    subgraph DockerCompose ["🐳 Entorno Docker Compose"]
-        Frontend["💻 Aplicación Web SPA<br/>[React 19 + TypeScript + Nginx]<br/>:3000"]
-        Backend["⚙️ Microservicio REST<br/>[Go 1.22+ net/http]<br/>:8080"]
-        Swagger["📖 Swagger UI / OpenAPI<br/>[Docs Embebidas]<br/>:8080/swagger"]
+    subgraph CalculatorSystem ["Calculator System [Software System — Docker Compose]"]
+        StaticContent["📁 Static Content<br/>[Container: Nginx Web Server]<br/>Port: 3000"]
+        WebUI["💻 Web UI<br/>[Container: React 19 & TypeScript]<br/>Port: 3000"]
+        BackendAPI["⚙️ > _ Backend API<br/>[Container: Go 1.22+ and net/http]<br/>Port: 8080"]
+        SessionStore[("💾 Session Store<br/>[Container: Browser LocalStorage]")]
     end
-    
-    Storage[("💾 LocalStorage<br/>[Browser]")]
 
-    User -->|"1. Clics / Teclado físico"| Frontend
-    Frontend -->|"2. POST /api/v1/calculate [HTTP/JSON]"| Backend
-    Backend -.->|"Expone documentación"| Swagger
-    Frontend -.->|"Persiste historial"| Storage
+    Swagger["📖 API Documentation<br/>[Swagger UI / OpenAPI 3.0]<br/>:8080/swagger"]
+
+    User -.->|"Loads the UI from [HTTP:3000]"| StaticContent
+    User -.->|"Enters calculations & views results using"| WebUI
+    User -.->|"Explores & tests REST API using [HTTP:8080/swagger]"| Swagger
+    StaticContent -.->|"Delivers bundle to"| WebUI
+    WebUI -.->|"Makes API requests to [JSON/HTTP:8080]"| BackendAPI
+    WebUI -.->|"Reads from & writes to [Browser API]"| SessionStore
+    BackendAPI -.->|"Serves interactive OpenAPI docs at /swagger"| Swagger
 ```
 
-### 2. C4 Dynamic Diagram: Flujo Directo de una Petición
+### 2. C4 Dynamic Diagram: Calculation Request Flow
 
-Este diagrama ilustra de forma directa y sin sobrecarga el ciclo de vida de una operación matemática (por ejemplo: `50 + 25 =`):
+This diagram illustrates the direct, step-by-step lifecycle of an arithmetic calculation request (e.g., `50 + 25 =`):
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as 👤 Usuario
-    participant UI as 💻 Interfaz React (Keypad/Display)
-    participant Hook as 🧠 useCalculator Hook
-    participant API as ⚙️ Go REST API (:8080)
-    participant Engine as 🧮 Motor de Dominio (Go)
+    actor User as 👤 User
+    participant UI as 💻 Web UI (React 19)
+    participant API as ⚙️ Backend API (Go net/http)
+    participant Engine as 🧮 Domain Engine (Go Core)
+    participant Store as 💾 Session Store (LocalStorage)
 
-    User->>UI: Escribe "50 + 25 =" (pantalla o teclado físico)
-    UI->>Hook: Captura evento y prepara operación
-    Hook->>API: HTTP POST /api/v1/calculate {"operation": "add", "a": 50, "b": 25}
-    Note over API: Logger registra latencia y CORS valida origen
-    API->>Engine: calculator.Add(50, 25)
-    Note over Engine: Ejecuta suma y sanitiza precisión flotante
-    Engine-->>API: Retorna resultado exacto: 75.0
-    API-->>Hook: HTTP 200 OK {"success": true, "result": 75}
-    Hook->>UI: Actualiza pantalla principal a "75" y guarda en LocalStorage
-    UI-->>User: Renderiza "75" en negrita con fórmula histórica "50 + 25 ="
+    User->>UI: 1. Enters "50 + 25 =" via clicks or physical keyboard
+    UI->>API: 2. POST /api/v1/calculate {"operation": "add", "a": 50, "b": 25}
+    Note over API: Structured logger captures latency; CORS validates origin
+    API->>Engine: 3. calculator.Add(50, 25)
+    Note over Engine: Computes sum & sanitizes IEEE-754 float precision
+    Engine-->>API: 4. Returns exact sanitized result: 75.0
+    API-->>UI: 5. HTTP 200 OK {"success": true, "result": 75}
+    UI->>Store: 6. Appends "50 + 25 = 75" to calculation history
+    UI-->>User: 7. Renders "75" in bold with running formula "50 + 25 ="
 ```
 
-### Diagramas Editables en Draw.io (`architecture.drawio`)
+### Editable Architecture Diagrams in Draw.io (`architecture.drawio`)
 
-El archivo **[`architecture.drawio`](./architecture.drawio)** (y su espejo en **[`docs/architecture.drawio`](./docs/architecture.drawio)**) ha sido rediseñado siguiendo el estándar C4 para ser visualmente limpio, directo y fácil de entender. Puedes abrirlo directamente en **[draw.io (diagrams.net)](https://app.diagrams.net/)** o en VS Code:
+The diagrams in **[`architecture.drawio`](./architecture.drawio)** (and mirrored at **[`docs/architecture.drawio`](./docs/architecture.drawio)**) are styled strictly after Simon Brown's official C4 model (clean white fills, thin colored outlines, dashed connectors with centered labels, in English):
 
-- **Página 1: `1. C4 - Diagrama de Contenedores`**: Muestra los contenedores del sistema (Frontend React en puerto 3000, Backend Go en puerto 8080, Swagger UI y LocalStorage) con estilos oficiales C4 en azul y verde.
-- **Página 2: `2. C4 - Flujo de una Petición`**: Representa el recorrido horizontal de 6 pasos claros desde la entrada del usuario hasta la respuesta 200 OK y el renderizado final.
+- **Page 1: `Container View: Calculator System`**: Shows the User, System Boundary, Static Content (Nginx), Web UI (React 19), Backend API (Go), Session Store (LocalStorage), and API Documentation (Swagger UI).
+- **Page 2: `Dynamic View: Request Flow`**: Shows the clean, direct 7-step horizontal request lifecycle from user keystroke to Go domain execution and display update.
+
+You can open and edit [`architecture.drawio`](./architecture.drawio) directly in **[app.diagrams.net](https://app.diagrams.net/)** or in VS Code with the Draw.io Integration extension.
 
 ---
 

@@ -1,146 +1,216 @@
-<mxfile host="app.diagrams.net" modified="2026-10-04T12:00:00.000Z" agent="Antigravity/1.0" version="21.0.0" type="device">
-  <diagram id="c4-containers" name="1. C4 - Diagrama de Contenedores">
-    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="650" math="0" shadow="0">
+<mxfile host="app.diagrams.net" modified="2026-10-04T12:05:00.000Z" agent="Antigravity/1.0" version="21.0.0" type="device">
+  <diagram id="c4-container-view" name="Container View: Calculator System">
+    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1150" pageHeight="850" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" /><mxCell id="1" parent="0" />
-    <mxCell id="c4_p1_title" value="&lt;b style=&quot;font-size: 20px;&quot;&gt;Calculadora Full-Stack — Modelo C4: Diagrama de Contenedores&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 13px; color: #555555;&quot;&gt;Visión general limpia de los sistemas, contenedores y sus responsabilidades&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-      <mxGeometry x="100" y="30" width="1000" height="50" as="geometry" />
+    <!-- Person: User -->
+    <mxCell id="user_head" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="380" y="20" width="60" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="user_body" value="&lt;b style=&quot;font-size: 14px; color: #2E7D32;&quot;&gt;User / Evaluator&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #2E7D32;&quot;&gt;[Person]&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #374151;&quot;&gt;An engineer or evaluator performing calculations using mouse clicks, touch, or a physical keyboard / numpad.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=2;arcSize=15;align=center;" vertex="1" parent="1">
+      <mxGeometry x="300" y="70" width="220" height="90" as="geometry" />
     </mxCell>
     
-    <mxCell id="c4_person" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;Usuario / Evaluador&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;[Persona]&lt;/span&gt;&lt;br&gt;&lt;br&gt;Realiza cálculos matemáticos usando el teclado físico o haciendo clic en los botones." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052C52;fontColor=#FFFFFF;shadow=1;arcSize=15;" vertex="1" parent="1">
-      <mxGeometry x="100" y="240" width="200" height="130" as="geometry" />
+    <!-- System Boundary -->
+    <mxCell id="sys_boundary" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0284C7;strokeWidth=2.5;arcSize=5;" vertex="1" parent="1">
+      <mxGeometry x="60" y="230" width="700" height="530" as="geometry" />
+    </mxCell>
+    <mxCell id="boundary_label" value="&lt;b style=&quot;font-size: 14px; color: #0284C7;&quot;&gt;Calculator System&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #0284C7;&quot;&gt;[Software System — Docker Compose]&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=bottom;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+      <mxGeometry x="80" y="715" width="280" height="35" as="geometry" />
     </mxCell>
     
-    <mxCell id="c4_boundary" value="&lt;b style=&quot;font-size: 13px; color: #475569;&quot;&gt;Entorno de la Aplicación (Docker Compose)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#94A3B8;strokeWidth=2;dashed=1;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;" vertex="1" parent="1">
-      <mxGeometry x="360" y="120" width="760" height="420" as="geometry" />
+    <!-- Static Content -->
+    <mxCell id="c_static_tab" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0284C7;strokeWidth=2;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="90" y="255" width="70" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="c_static" value="&lt;b style=&quot;font-size: 14px; color: #0284C7;&quot;&gt;Static Content&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #0284C7;&quot;&gt;[Container: Nginx Web Server]&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #374151;&quot;&gt;Serves compiled HTML, CSS (soft pastel palette &amp;amp; circular keys), and TypeScript/React bundle.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0284C7;strokeWidth=2;arcSize=8;align=center;" vertex="1" parent="1">
+      <mxGeometry x="90" y="270" width="200" height="120" as="geometry" />
     </mxCell>
     
-    <mxCell id="c4_frontend" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;Aplicación Web (SPA)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;[Contenedor: React 19, TypeScript, Nginx]&lt;/span&gt;&lt;br&gt;&lt;br&gt;Interfaz gráfica con estilo Material You (colores suaves y botones circulares). Captura teclas, administra el estado y envía peticiones al API.&lt;br&gt;&lt;br&gt;&lt;i style=&quot;font-size: 10px; color: #E2E8F0;&quot;&gt;Puerto: 3000&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168BD;strokeColor=#0B4884;fontColor=#FFFFFF;shadow=1;arcSize=10;" vertex="1" parent="1">
-      <mxGeometry x="400" y="210" width="280" height="190" as="geometry" />
+    <!-- UI Container -->
+    <mxCell id="c_ui_bar" value="•••" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0284C7;strokeWidth=2;arcSize=10;align=left;spacingLeft=8;fontColor=#0284C7;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="400" y="255" width="220" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="c_ui" value="&lt;b style=&quot;font-size: 14px; color: #0284C7;&quot;&gt;Web UI&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #0284C7;&quot;&gt;[Container: React 19 &amp;amp; TypeScript]&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #374151;&quot;&gt;Single-page application providing an interactive Material You calculator interface with dual-line display and physical keyboard support.&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #64748B;&quot;&gt;Port: 3000&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0284C7;strokeWidth=2;arcSize=8;align=center;" vertex="1" parent="1">
+      <mxGeometry x="400" y="270" width="220" height="150" as="geometry" />
     </mxCell>
     
-    <mxCell id="c4_backend" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;Microservicio REST&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;[Contenedor: Go 1.22+, net/http]&lt;/span&gt;&lt;br&gt;&lt;br&gt;Procesa operaciones básicas y avanzadas, sanitiza la precisión en punto flotante y registra telemetría con CORS.&lt;br&gt;&lt;br&gt;&lt;i style=&quot;font-size: 10px; color: #E2E8F0;&quot;&gt;Puerto: 8080&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168BD;strokeColor=#0B4884;fontColor=#FFFFFF;shadow=1;arcSize=10;" vertex="1" parent="1">
-      <mxGeometry x="800" y="210" width="280" height="190" as="geometry" />
+    <!-- Backend API Container -->
+    <mxCell id="c_backend" value="&lt;b style=&quot;font-size: 14px; color: #0284C7;&quot;&gt;&amp;gt; _ Backend API&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #0284C7;&quot;&gt;[Container: Go 1.22+ and net/http]&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #374151;&quot;&gt;Provides arithmetic calculation services, floating-point precision sanitization, CORS, and request logging via a REST/JSON API.&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #64748B;&quot;&gt;Port: 8080&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0284C7;strokeWidth=2;arcSize=8;align=center;" vertex="1" parent="1">
+      <mxGeometry x="400" y="470" width="220" height="145" as="geometry" />
     </mxCell>
     
-    <mxCell id="c4_storage" value="&lt;b style=&quot;font-size: 13px;&quot;&gt;Almacenamiento Local&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;[Storage: Browser LocalStorage]&lt;/span&gt;&lt;br&gt;&lt;br&gt;Persiste el historial de cálculos entre recargas de página." style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;shadow=1;" vertex="1" parent="1">
-      <mxGeometry x="445" y="430" width="190" height="90" as="geometry" />
+    <!-- Session Storage -->
+    <mxCell id="c_storage" value="&lt;b style=&quot;font-size: 14px; color: #0284C7;&quot;&gt;Session Store&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #0284C7;&quot;&gt;[Container: Browser LocalStorage]&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #374151;&quot;&gt;Stores recent calculation history locally across browser sessions.&lt;/span&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#FFFFFF;strokeColor=#0284C7;strokeWidth=2;align=center;" vertex="1" parent="1">
+      <mxGeometry x="110" y="475" width="180" height="135" as="geometry" />
     </mxCell>
     
-    <mxCell id="c4_swagger" value="&lt;b style=&quot;font-size: 13px;&quot;&gt;Swagger UI / OpenAPI&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;[Documentación Interactiva]&lt;/span&gt;&lt;br&gt;&lt;br&gt;Embebido en el binario de Go en &lt;b&gt;/swagger&lt;/b&gt; para probar los contratos REST en vivo." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#10B981;strokeColor=#047857;fontColor=#FFFFFF;shadow=1;arcSize=10;" vertex="1" parent="1">
-      <mxGeometry x="840" y="430" width="200" height="85" as="geometry" />
+    <!-- Swagger UI System -->
+    <mxCell id="sys_swagger" value="&lt;b style=&quot;font-size: 14px; color: #0D9488;&quot;&gt;API Documentation&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #0D9488;&quot;&gt;[Embedded OpenAPI 3.0 / Swagger UI]&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #374151;&quot;&gt;Self-contained interactive Swagger interface embedded at &lt;b&gt;/swagger&lt;/b&gt; for testing API endpoints.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0D9488;strokeWidth=2;arcSize=10;align=center;" vertex="1" parent="1">
+      <mxGeometry x="840" y="360" width="220" height="130" as="geometry" />
     </mxCell>
     
-    <!-- User to Frontend -->
-    <mxCell id="c4_rel_user_fe" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#08427B;strokeWidth=2.5;" edge="1" parent="1" source="c4_person" target="c4_frontend">
-      <mxGeometry relative="1" as="geometry" />
+    <!-- User to Static Content -->
+    <mxCell id="rel_u_static" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user_body" target="c_static_tab">
+      <mxGeometry relative="1" as="geometry">
+        <Array points="340 190; 125 190" />
+      </mxGeometry>
     </mxCell>
-    <mxCell id="lbl_user_fe" value="&lt;b&gt;Usa la interfaz&lt;/b&gt;&lt;br&gt;[Clics o Teclado]&lt;br&gt;http://localhost:3000" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontColor=#08427B;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="c4_rel_user_fe">
-      <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint x="7" y="-2" as="offset" /></mxGeometry>
+    <mxCell id="lbl_u_static" value="Loads the UI from&lt;br&gt;[HTTP:3000]" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="rel_u_static">
+      <mxGeometry x="0.2" relative="1" as="geometry"><mxPoint y="-5" as="offset" /></mxGeometry>
     </mxCell>
 
-    <!-- Frontend to Backend -->
-    <mxCell id="c4_rel_fe_be" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1168BD;strokeWidth=2.5;" edge="1" parent="1" source="c4_frontend" target="c4_backend">
-      <mxGeometry relative="1" as="geometry" />
+    <!-- User to Web UI -->
+    <mxCell id="rel_u_ui" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user_body" target="c_ui_bar">
+      <mxGeometry relative="1" as="geometry">
+        <Array points="470 190; 510 190" />
+      </mxGeometry>
     </mxCell>
-    <mxCell id="lbl_fe_be" value="&lt;b&gt;Envía operaciones&lt;/b&gt;&lt;br&gt;[HTTP / JSON]&lt;br&gt;POST /api/v1/calculate" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontColor=#1168BD;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="c4_rel_fe_be">
-      <mxGeometry x="-0.05" relative="1" as="geometry"><mxPoint y="-2" as="offset" /></mxGeometry>
-    </mxCell>
-
-    <!-- Frontend to Storage -->
-    <mxCell id="c4_rel_fe_store" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#438DD5;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="c4_frontend" target="c4_storage">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-    <mxCell id="lbl_fe_store" value="Guarda historial" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#2E6295;fillColor=#FFFFFF;" vertex="1" connectable="0" parent="c4_rel_fe_store">
+    <mxCell id="lbl_u_ui" value="Enters calculations and&lt;br&gt;views results using" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="rel_u_ui">
       <mxGeometry x="0.1" relative="1" as="geometry"><mxPoint y="-5" as="offset" /></mxGeometry>
     </mxCell>
 
-    <!-- Backend to Swagger -->
-    <mxCell id="c4_rel_be_swag" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#10B981;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="c4_backend" target="c4_swagger">
+    <!-- Static Content to Web UI -->
+    <mxCell id="rel_static_ui" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="c_static" target="c_ui">
       <mxGeometry relative="1" as="geometry" />
     </mxCell>
-    <mxCell id="lbl_be_swag" value="Expone documentación" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#047857;fillColor=#FFFFFF;" vertex="1" connectable="0" parent="c4_rel_be_swag">
+    <mxCell id="lbl_static_ui" value="Delivers" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="rel_static_ui">
+      <mxGeometry x="0.0" relative="1" as="geometry"><mxPoint y="-5" as="offset" /></mxGeometry>
+    </mxCell>
+
+    <!-- Web UI to Backend API -->
+    <mxCell id="rel_ui_be" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="c_ui" target="c_backend">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="lbl_ui_be" value="Makes API requests to&lt;br&gt;[JSON/HTTP:8080]" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="rel_ui_be">
+      <mxGeometry x="0.0" relative="1" as="geometry"><mxPoint x="65" as="offset" /></mxGeometry>
+    </mxCell>
+
+    <!-- Web UI to Session Storage -->
+    <mxCell id="rel_ui_store" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;exitX=0;exitY=0.8;entryX=1;entryY=0.3;" edge="1" parent="1" source="c_ui" target="c_storage">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="lbl_ui_store" value="Reads from and&lt;br&gt;writes to [Browser API]" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="rel_ui_store">
+      <mxGeometry x="0.0" relative="1" as="geometry"><mxPoint y="-10" as="offset" /></mxGeometry>
+    </mxCell>
+
+    <!-- Backend API to Swagger UI -->
+    <mxCell id="rel_be_swag" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="c_backend" target="sys_swagger">
+      <mxGeometry relative="1" as="geometry">
+        <Array points="740 542; 740 425" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_be_swag" value="Serves interactive&lt;br&gt;OpenAPI docs at /swagger" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="rel_be_swag">
       <mxGeometry x="0.1" relative="1" as="geometry"><mxPoint y="-5" as="offset" /></mxGeometry>
+    </mxCell>
+
+    <!-- User to Swagger UI -->
+    <mxCell id="rel_u_swag" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="user_body" target="sys_swagger">
+      <mxGeometry relative="1" as="geometry">
+        <Array points="950 115" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_u_swag" value="Explores &amp;amp; tests REST API using&lt;br&gt;[HTTP:8080/swagger]" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="rel_u_swag">
+      <mxGeometry x="0.1" relative="1" as="geometry"><mxPoint y="-10" as="offset" /></mxGeometry>
+    </mxCell>
+    
+    <!-- Footer Caption -->
+    <mxCell id="c4_footer" value="&lt;b style=&quot;font-size: 13px; color: #1E293B;&quot;&gt;Container View: Calculator System&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10.5px; color: #64748B;&quot;&gt;The container diagram for the Full-Stack Calculator System | Inspired by Simon Brown C4 Model (c4model.com)&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+      <mxGeometry x="60" y="775" width="700" height="40" as="geometry" />
     </mxCell>
     
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="c4-dynamic" name="2. C4 - Flujo de una Petición">
-    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="650" math="0" shadow="0">
+  <diagram id="c4-dynamic-view" name="Dynamic View: Request Flow">
+    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1150" pageHeight="520" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" /><mxCell id="1" parent="0" />
-    <!-- Title Page 2 -->
-    <mxCell id="c4_p2_title" value="&lt;b style=&quot;font-size: 20px;&quot;&gt;Modelo C4: Diagrama Dinámico — Flujo Directo de una Petición&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 13px; color: #555555;&quot;&gt;Secuencia directa y limpia de cómo se procesa un cálculo (Ejemplo: 50 + 25 =)&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-      <mxGeometry x="100" y="30" width="1050" height="50" as="geometry" />
+    <mxCell id="dyn_u_head" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="90" y="60" width="50" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="dyn_u_body" value="&lt;b style=&quot;font-size: 13px; color: #2E7D32;&quot;&gt;User&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #2E7D32;&quot;&gt;[Person]&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #374151;&quot;&gt;Types &lt;b&gt;&quot;50 + 25 =&quot;&lt;/b&gt; on screen or physical keyboard&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=2;arcSize=10;align=center;" vertex="1" parent="1">
+      <mxGeometry x="30" y="100" width="170" height="110" as="geometry" />
     </mxCell>
     
-    <mxCell id="d_user" value="&lt;b style=&quot;font-size: 13px;&quot;&gt;1. Usuario&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;[Persona]&lt;/span&gt;&lt;br&gt;&lt;br&gt;Escribe &lt;b&gt;50 + 25 =&lt;/b&gt;&lt;br&gt;en la pantalla o teclado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052C52;fontColor=#FFFFFF;shadow=1;" vertex="1" parent="1">
-      <mxGeometry x="60" y="170" width="170" height="110" as="geometry" />
+    <mxCell id="dyn_ui_bar" value="•••" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0284C7;strokeWidth=2;arcSize=10;align=left;spacingLeft=8;fontColor=#0284C7;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="300" y="85" width="180" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="dyn_ui_box" value="&lt;b style=&quot;font-size: 13px; color: #0284C7;&quot;&gt;Web UI (SPA)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #0284C7;&quot;&gt;[Container: React 19]&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #374151;&quot;&gt;Captures key events, resets display cleanly, and prepares request&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0284C7;strokeWidth=2;arcSize=10;align=center;" vertex="1" parent="1">
+      <mxGeometry x="300" y="100" width="180" height="110" as="geometry" />
     </mxCell>
     
-    <mxCell id="d_ui" value="&lt;b style=&quot;font-size: 13px;&quot;&gt;2. Interfaz React&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;[Componentes UI]&lt;/span&gt;&lt;br&gt;&lt;br&gt;Actualiza el display y valida los operandos en el hook de estado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168BD;strokeColor=#0B4884;fontColor=#FFFFFF;shadow=1;" vertex="1" parent="1">
-      <mxGeometry x="340" y="170" width="190" height="110" as="geometry" />
+    <mxCell id="dyn_be_box" value="&lt;b style=&quot;font-size: 13px; color: #0284C7;&quot;&gt;&amp;gt; _ Backend API&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #0284C7;&quot;&gt;[Container: Go 1.22+]&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #374151;&quot;&gt;Logs request latency, validates CORS, and decodes JSON payload&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0284C7;strokeWidth=2;arcSize=10;align=center;" vertex="1" parent="1">
+      <mxGeometry x="580" y="100" width="190" height="110" as="geometry" />
     </mxCell>
     
-    <mxCell id="d_api" value="&lt;b style=&quot;font-size: 13px;&quot;&gt;3. API REST (Go)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;[Router &amp;amp; Handler]&lt;/span&gt;&lt;br&gt;&lt;br&gt;Registra latencia (Logger), valida CORS y decodifica el JSON" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168BD;strokeColor=#0B4884;fontColor=#FFFFFF;shadow=1;" vertex="1" parent="1">
-      <mxGeometry x="640" y="170" width="200" height="110" as="geometry" />
+    <mxCell id="dyn_eng_box" value="&lt;b style=&quot;font-size: 13px; color: #0D9488;&quot;&gt;Domain Engine&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #0D9488;&quot;&gt;[Component: internal/calculator]&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #374151;&quot;&gt;Executes calculation &amp;amp; sanitizes IEEE-754 precision&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0D9488;strokeWidth=2;arcSize=10;align=center;" vertex="1" parent="1">
+      <mxGeometry x="870" y="100" width="190" height="110" as="geometry" />
     </mxCell>
     
-    <mxCell id="d_engine" value="&lt;b style=&quot;font-size: 13px;&quot;&gt;4. Motor de Dominio&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;[Lógica Pura Go]&lt;/span&gt;&lt;br&gt;&lt;br&gt;Ejecuta la suma (50 + 25)&lt;br&gt;y sanitiza punto flotante" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#059669;strokeColor=#047857;fontColor=#FFFFFF;shadow=1;" vertex="1" parent="1">
-      <mxGeometry x="950" y="170" width="190" height="110" as="geometry" />
+    <mxCell id="dyn_store_box" value="&lt;b style=&quot;font-size: 13px; color: #0284C7;&quot;&gt;Session Store&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px; color: #0284C7;&quot;&gt;[Browser LocalStorage]&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #374151;&quot;&gt;Persists equation history for session recall&lt;/span&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#FFFFFF;strokeColor=#0284C7;strokeWidth=2;align=center;" vertex="1" parent="1">
+      <mxGeometry x="315" y="320" width="150" height="90" as="geometry" />
     </mxCell>
     
-    <!-- 1 -> 2: Clic / Teclado -->
-    <mxCell id="f_step1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#08427B;strokeWidth=2.5;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="d_user" target="d_ui">
+    <!-- Step 1: User types input -->
+    <mxCell id="d_step1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="dyn_u_body" target="dyn_ui_box">
       <mxGeometry relative="1" as="geometry" />
     </mxCell>
-    <mxCell id="lbl_step1" value="&lt;b&gt;Paso 1&lt;/b&gt;&lt;br&gt;Evento de entrada" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#08427B;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="f_step1">
-      <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint x="5" y="-14" as="offset" /></mxGeometry>
+    <mxCell id="d_lbl_step1" value="1. Enters input&lt;br&gt;[Clicks / Keydown]" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="d_step1">
+      <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint x="5" y="-12" as="offset" /></mxGeometry>
     </mxCell>
 
-    <!-- 2 -> 3: HTTP POST /api/v1/calculate -->
-    <mxCell id="f_step2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#1168BD;strokeWidth=2.5;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="d_ui" target="d_api">
+    <!-- Step 2: HTTP POST /api/v1/calculate -->
+    <mxCell id="d_step2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="dyn_ui_box" target="dyn_be_box">
       <mxGeometry relative="1" as="geometry" />
     </mxCell>
-    <mxCell id="lbl_step2" value="&lt;b&gt;Paso 2: HTTP POST&lt;/b&gt;&lt;br&gt;{&quot;operation&quot;: &quot;add&quot;, &quot;a&quot;: 50, &quot;b&quot;: 25}" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#1168BD;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="f_step2">
-      <mxGeometry x="-0.05" relative="1" as="geometry"><mxPoint y="-18" as="offset" /></mxGeometry>
+    <mxCell id="d_lbl_step2" value="2. POST /api/v1/calculate&lt;br&gt;{&quot;operation&quot;: &quot;add&quot;, &quot;a&quot;: 50, &quot;b&quot;: 25}" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="d_step2">
+      <mxGeometry x="-0.05" relative="1" as="geometry"><mxPoint y="-15" as="offset" /></mxGeometry>
     </mxCell>
 
-    <!-- 3 -> 4: Dispatch to domain engine -->
-    <mxCell id="f_step3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#059669;strokeWidth=2.5;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="d_api" target="d_engine">
+    <!-- Step 3: Call domain Add -->
+    <mxCell id="d_step3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="dyn_be_box" target="dyn_eng_box">
       <mxGeometry relative="1" as="geometry" />
     </mxCell>
-    <mxCell id="lbl_step3" value="&lt;b&gt;Paso 3&lt;/b&gt;&lt;br&gt;calculator.Add(50, 25)" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#047857;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="f_step3">
-      <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint x="5" y="-14" as="offset" /></mxGeometry>
+    <mxCell id="d_lbl_step3" value="3. calculator.Add(50, 25)" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="d_step3">
+      <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint x="5" y="-12" as="offset" /></mxGeometry>
+    </mxCell>
+
+    <!-- Step 4: Return float sanitized result -->
+    <mxCell id="d_step4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;exitX=0;exitY=0.75;entryX=1;entryY=0.75;" edge="1" parent="1" source="dyn_eng_box" target="dyn_be_box">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="d_lbl_step4" value="4. Returns result: 75.0" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="d_step4">
+      <mxGeometry x="0.1" relative="1" as="geometry"><mxPoint x="5" y="12" as="offset" /></mxGeometry>
+    </mxCell>
+
+    <!-- Step 5: HTTP 200 OK -->
+    <mxCell id="d_step5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;exitX=0;exitY=0.75;entryX=1;entryY=0.75;" edge="1" parent="1" source="dyn_be_box" target="dyn_ui_box">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="d_lbl_step5" value="5. HTTP 200 OK&lt;br&gt;{&quot;success&quot;: true, &quot;result&quot;: 75}" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="d_step5">
+      <mxGeometry x="0.05" relative="1" as="geometry"><mxPoint y="15" as="offset" /></mxGeometry>
+    </mxCell>
+
+    <!-- Step 6: Render to user -->
+    <mxCell id="d_step6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;exitX=0;exitY=0.75;entryX=1;entryY=0.75;" edge="1" parent="1" source="dyn_ui_box" target="dyn_u_body">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="d_lbl_step6" value="6. Renders &quot;75&quot;&lt;br&gt;on bold display" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="d_step6">
+      <mxGeometry x="0.1" relative="1" as="geometry"><mxPoint x="5" y="14" as="offset" /></mxGeometry>
+    </mxCell>
+
+    <!-- Step 7: Persist history -->
+    <mxCell id="d_step7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="dyn_ui_box" target="dyn_store_box">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="d_lbl_step7" value="7. Saves &quot;50 + 25 = 75&quot; to history" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#374151;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="d_step7">
+      <mxGeometry x="0.0" relative="1" as="geometry"><mxPoint x="75" as="offset" /></mxGeometry>
     </mxCell>
     
-    <!-- 4 -> 3: Result calculated -->
-    <mxCell id="r_step4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#059669;strokeWidth=2;dashed=1;exitX=0;exitY=0.75;entryX=1;entryY=0.75;" edge="1" parent="1" source="d_engine" target="d_api">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-    <mxCell id="lbl_step4" value="&lt;b&gt;Paso 4: Resultado&lt;/b&gt;&lt;br&gt;Retorna: 75.0" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#047857;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="r_step4">
-      <mxGeometry x="0.1" relative="1" as="geometry"><mxPoint x="6" y="14" as="offset" /></mxGeometry>
-    </mxCell>
-
-    <!-- 3 -> 2: HTTP 200 OK Response -->
-    <mxCell id="r_step5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#1168BD;strokeWidth=2;dashed=1;exitX=0;exitY=0.75;entryX=1;entryY=0.75;" edge="1" parent="1" source="d_api" target="d_ui">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-    <mxCell id="lbl_step5" value="&lt;b&gt;Paso 5: HTTP 200 OK&lt;/b&gt;&lt;br&gt;{&quot;success&quot;: true, &quot;result&quot;: 75}" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#1168BD;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="r_step5">
-      <mxGeometry x="0.05" relative="1" as="geometry"><mxPoint y="16" as="offset" /></mxGeometry>
-    </mxCell>
-
-    <!-- 2 -> 1: Final Display Update -->
-    <mxCell id="r_step6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#08427B;strokeWidth=2;dashed=1;exitX=0;exitY=0.75;entryX=1;entryY=0.75;" edge="1" parent="1" source="d_ui" target="d_user">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-    <mxCell id="lbl_step6" value="&lt;b&gt;Paso 6: Renderizado&lt;/b&gt;&lt;br&gt;Muestra 75 en pantalla&lt;br&gt;&amp;amp; guarda en historial" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#08427B;fillColor=#FFFFFF;rounded=1;" vertex="1" connectable="0" parent="r_step6">
-      <mxGeometry x="0.1" relative="1" as="geometry"><mxPoint x="6" y="18" as="offset" /></mxGeometry>
-    </mxCell>
-    
-    <mxCell id="summary_box" value="&lt;b style=&quot;font-size: 13px; color: #1E293B;&quot;&gt;Resumen del Flujo de una Petición&lt;/b&gt;&lt;br&gt;&lt;table style=&quot;font-size: 11px; text-align: left; width: 100%; border-collapse: collapse; margin-top: 6px;&quot;&gt;&lt;tr style=&quot;background: #F1F5F9;&quot;&gt;&lt;th style=&quot;padding: 5px; border: 1px solid #CBD5E1;&quot;&gt;Etapa&lt;/th&gt;&lt;th style=&quot;padding: 5px; border: 1px solid #CBD5E1;&quot;&gt;Componente&lt;/th&gt;&lt;th style=&quot;padding: 5px; border: 1px solid #CBD5E1;&quot;&gt;Acción / Descripción&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding: 4px; border: 1px solid #CBD5E1;&quot;&gt;&lt;b&gt;Entrada&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;padding: 4px; border: 1px solid #CBD5E1;&quot;&gt;Usuario -&amp;gt; UI&lt;/td&gt;&lt;td style=&quot;padding: 4px; border: 1px solid #CBD5E1;&quot;&gt;El usuario presiona teclas numéricas y operadores. La UI actualiza la fórmula en vivo.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding: 4px; border: 1px solid #CBD5E1;&quot;&gt;&lt;b&gt;Transporte&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;padding: 4px; border: 1px solid #CBD5E1;&quot;&gt;React -&amp;gt; Go API&lt;/td&gt;&lt;td style=&quot;padding: 4px; border: 1px solid #CBD5E1;&quot;&gt;Al presionar &lt;b&gt;=&lt;/b&gt;, React emite &lt;b&gt;POST /api/v1/calculate&lt;/b&gt; con payload JSON.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding: 4px; border: 1px solid #CBD5E1;&quot;&gt;&lt;b&gt;Procesamiento&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;padding: 4px; border: 1px solid #CBD5E1;&quot;&gt;Backend Go&lt;/td&gt;&lt;td style=&quot;padding: 4px; border: 1px solid #CBD5E1;&quot;&gt;Middleware registra latencia, handler valida operando y motor ejecuta cálculo sanitizado.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding: 4px; border: 1px solid #CBD5E1;&quot;&gt;&lt;b&gt;Respuesta&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;padding: 4px; border: 1px solid #CBD5E1;&quot;&gt;Go API -&amp;gt; React&lt;/td&gt;&lt;td style=&quot;padding: 4px; border: 1px solid #CBD5E1;&quot;&gt;Retorna &lt;b&gt;200 OK&lt;/b&gt; con el resultado numérico. React renderiza y guarda en &lt;b&gt;localStorage&lt;/b&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;shadow=1;" vertex="1" parent="1">
-      <mxGeometry x="100" y="340" width="1000" height="150" as="geometry" />
+    <!-- Footer Caption -->
+    <mxCell id="d_footer" value="&lt;b style=&quot;font-size: 13px; color: #1E293B;&quot;&gt;Dynamic View: Calculation Request Flow&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10.5px; color: #64748B;&quot;&gt;Step-by-step lifecycle of an arithmetic calculation request | Simon Brown C4 Dynamic Model&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+      <mxGeometry x="30" y="440" width="700" height="40" as="geometry" />
     </mxCell>
     
       </root>
