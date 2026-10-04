@@ -14,6 +14,7 @@ export function App() {
     loading,
     error,
     history,
+    pendingOp,
     inputDigit,
     inputDecimal,
     setOperation,
@@ -126,6 +127,7 @@ export function App() {
           onClear={clear}
           onDelete={deleteDigit}
           onToggleSign={toggleSign}
+          activeOp={pendingOp}
           disabled={loading}
         />
 

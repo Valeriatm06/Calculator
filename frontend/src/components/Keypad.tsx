@@ -11,6 +11,7 @@ interface KeypadProps {
   onClear: () => void;
   onDelete: () => void;
   onToggleSign: () => void;
+  activeOp?: OperationType | null;
   disabled?: boolean;
 }
 
@@ -23,6 +24,7 @@ export const Keypad: React.FC<KeypadProps> = ({
   onClear,
   onDelete,
   onToggleSign,
+  activeOp = null,
   disabled = false,
 }) => {
   return (
@@ -58,7 +60,7 @@ export const Keypad: React.FC<KeypadProps> = ({
       </button>
       <button
         type="button"
-        className="key-btn action-func"
+        className={`key-btn action-func ${activeOp === 'power' ? 'active-op' : ''}`}
         onClick={() => onOperation('power')}
         disabled={disabled}
         data-testid="key-power"
@@ -90,7 +92,7 @@ export const Keypad: React.FC<KeypadProps> = ({
       </button>
       <button
         type="button"
-        className="key-btn action-operator key-span-2"
+        className={`key-btn action-operator key-span-2 ${activeOp === 'divide' ? 'active-op' : ''}`}
         onClick={() => onOperation('divide')}
         disabled={disabled}
         data-testid="key-divide"
@@ -126,7 +128,7 @@ export const Keypad: React.FC<KeypadProps> = ({
       </button>
       <button
         type="button"
-        className="key-btn action-operator"
+        className={`key-btn action-operator ${activeOp === 'multiply' ? 'active-op' : ''}`}
         onClick={() => onOperation('multiply')}
         disabled={disabled}
         data-testid="key-multiply"
@@ -162,7 +164,7 @@ export const Keypad: React.FC<KeypadProps> = ({
       </button>
       <button
         type="button"
-        className="key-btn action-operator"
+        className={`key-btn action-operator ${activeOp === 'subtract' ? 'active-op' : ''}`}
         onClick={() => onOperation('subtract')}
         disabled={disabled}
         data-testid="key-subtract"
@@ -198,7 +200,7 @@ export const Keypad: React.FC<KeypadProps> = ({
       </button>
       <button
         type="button"
-        className="key-btn action-operator"
+        className={`key-btn action-operator ${activeOp === 'add' ? 'active-op' : ''}`}
         onClick={() => onOperation('add')}
         disabled={disabled}
         data-testid="key-add"

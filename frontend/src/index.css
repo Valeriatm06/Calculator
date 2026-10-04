@@ -297,6 +297,13 @@ body {
   font-weight: 600;
 }
 
+.key-btn.active-op {
+  background: #4f46e5 !important;
+  color: #ffffff !important;
+  border-color: #818cf8 !important;
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.7) !important;
+}
+
 .key-btn.action-equals {
   background: linear-gradient(135deg, var(--accent-primary), #4338ca);
   color: white;

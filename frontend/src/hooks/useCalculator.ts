@@ -8,6 +8,7 @@ interface UseCalculatorReturn {
   loading: boolean;
   error: string | null;
   history: HistoryItem[];
+  pendingOp: OperationType | null;
   inputDigit: (digit: string) => void;
   inputDecimal: () => void;
   setOperation: (op: OperationType) => void;
@@ -28,7 +29,7 @@ export function useCalculator(): UseCalculatorReturn {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Synchronous ref for new-input tracking to avoid stale-closure issues during fast typing
+  // Synchronous ref for new-input tracking to avoid stale-closure issues
   const isNewInputRef = useRef<boolean>(true);
 
   const [history, setHistory] = useState<HistoryItem[]>(() => {
@@ -76,9 +77,13 @@ export function useCalculator(): UseCalculatorReturn {
 
   const inputDigit = useCallback((digit: string) => {
     setError(null);
+    if (isNewInputRef.current) {
+      isNewInputRef.current = false;
+      setDisplay(digit);
+      return;
+    }
     setDisplay((prev) => {
-      if (isNewInputRef.current || prev === '0') {
-        isNewInputRef.current = false;
+      if (prev === '0') {
         return digit;
       }
       if (prev.replace('-', '').replace('.', '').length >= 14) {
@@ -90,11 +95,12 @@ export function useCalculator(): UseCalculatorReturn {
 
   const inputDecimal = useCallback(() => {
     setError(null);
+    if (isNewInputRef.current) {
+      isNewInputRef.current = false;
+      setDisplay('0.');
+      return;
+    }
     setDisplay((prev) => {
-      if (isNewInputRef.current) {
-        isNewInputRef.current = false;
-        return '0.';
-      }
       if (!prev.includes('.')) {
         return prev + '.';
       }
@@ -146,7 +152,14 @@ export function useCalculator(): UseCalculatorReturn {
       return;
     }
 
-    // Chaining operations (e.g. 5 + 5 + -> evaluates first and keeps second pending)
+    // If operator changed before entering a new number, simply change the operator
+    if (pendingValue !== null && pendingOp && isNewInputRef.current) {
+      setPendingOp(op);
+      setEquation(`${pendingValue} ${getSymbol(op)}`);
+      return;
+    }
+
+    // Chaining operations (e.g. 5 + 5 + -> evaluates first and keeps next pending)
     if (pendingValue !== null && pendingOp && !isNewInputRef.current) {
       setLoading(true);
       try {
@@ -164,10 +177,10 @@ export function useCalculator(): UseCalculatorReturn {
         };
         setHistory((prev) => [newHistoryItem, ...prev.slice(0, 19)]);
 
-        setDisplay(String(resp.result));
         setPendingValue(resp.result);
         setPendingOp(op);
         setEquation(`${resp.result} ${getSymbol(op)}`);
+        setDisplay('0');
         isNewInputRef.current = true;
       } catch (err: unknown) {
         if (err instanceof CalculatorApiError) {
@@ -184,6 +197,7 @@ export function useCalculator(): UseCalculatorReturn {
     setPendingValue(currentValue);
     setPendingOp(op);
     setEquation(`${currentValue} ${getSymbol(op)}`);
+    setDisplay('0');
     isNewInputRef.current = true;
   }, [display, pendingOp, pendingValue]);
 
@@ -289,6 +303,7 @@ export function useCalculator(): UseCalculatorReturn {
     loading,
     error,
     history,
+    pendingOp,
     inputDigit,
     inputDecimal,
     setOperation,

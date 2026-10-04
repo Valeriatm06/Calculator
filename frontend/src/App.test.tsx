@@ -114,4 +114,41 @@ describe('Calculator App Integration', () => {
     expect(within(historyPanel).getByText('5 × 5 =')).toBeInTheDocument();
     expect(within(historyPanel).getByText('25')).toBeInTheDocument();
   });
+
+  it('correctly handles 55 + 55: clears main display on operator and replaces cleanly without 5555', async () => {
+    vi.spyOn(api, 'calculate').mockResolvedValueOnce({
+      operation: 'add',
+      a: 55,
+      b: 55,
+      result: 110,
+      formatted: '55 + 55 = 110',
+    });
+
+    render(<App />);
+
+    // Type 55
+    fireEvent.click(screen.getByTestId('key-5'));
+    fireEvent.click(screen.getByTestId('key-5'));
+    expect(screen.getByTestId('display-value')).toHaveTextContent('55');
+
+    // Click + (55 moves to equation, main display clears/resets to 0, active operator glows)
+    fireEvent.click(screen.getByTestId('key-add'));
+    expect(screen.getByTestId('display-equation')).toHaveTextContent('55 +');
+    expect(screen.getByTestId('display-value')).toHaveTextContent('0');
+    expect(screen.getByTestId('key-add')).toHaveClass('active-op');
+
+    // Type 55 again
+    fireEvent.click(screen.getByTestId('key-5'));
+    expect(screen.getByTestId('display-value')).toHaveTextContent('5'); // NOT 555
+    fireEvent.click(screen.getByTestId('key-5'));
+    expect(screen.getByTestId('display-value')).toHaveTextContent('55'); // NOT 5555
+
+    // Click =
+    fireEvent.click(screen.getByTestId('key-equals'));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('display-value')).toHaveTextContent('110');
+      expect(screen.getByTestId('display-equation')).toHaveTextContent('55 + 55 =');
+    });
+  });
 });
