@@ -61,6 +61,15 @@ This project follows clean code principles, separation of concerns, and idiomati
 └────────────────────────────────────────────────────────┘
 ```
 
+### Visual Architecture Diagrams (`architecture.drawio`)
+
+The project includes an interactive, multi-sheet diagram file ready to open in **[draw.io (diagrams.net)](https://app.diagrams.net/)** or the **VS Code Draw.io Integration** extension:
+- **File location**: [`architecture.drawio`](./architecture.drawio) (also mirrored in [`docs/architecture.drawio`](./docs/architecture.drawio))
+- **Sheets included**:
+  1. **1. System & Container Architecture**: Docker Compose network, Nginx static host, React 19 component hierarchy, REST HTTP/JSON bridge, and Go microservice layers.
+  2. **2. Request & Data Flow Sequence**: Step-by-step lifecycle from physical keystroke, `useCalculator` hook, HTTP request/response cycle, to Go domain calculation and local storage sync.
+  3. **3. Backend Clean Architecture**: Layered separation of concerns between `cmd/api`, `internal/middleware`, `internal/handler`, and pure `internal/calculator` domain engine.
+
 ---
 
 ## Features
