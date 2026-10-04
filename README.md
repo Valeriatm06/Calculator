@@ -2,6 +2,7 @@
 
 [![Go Tests](https://img.shields.io/badge/Go_Backend_Coverage-96%25-brightgreen.svg)]()
 [![Frontend Tests](https://img.shields.io/badge/React_Tests-18_Passing-blue.svg)]()
+[![API Docs](https://img.shields.io/badge/API_Docs-Swagger_UI-85EA2D.svg?logo=swagger&logoColor=black)](http://localhost:8080/swagger)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue.svg)]()
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)]()
 
@@ -21,7 +22,8 @@ A modern, production-grade full-stack calculator application featuring a **Go RE
 - [Running Unit Tests & Coverage](#running-unit-tests--coverage)
   - [Backend Coverage Report](#backend-coverage-report)
   - [Frontend Test Suite](#frontend-test-suite)
-- [REST API Documentation & Examples](#rest-api-documentation--examples)
+- [Interactive Swagger UI & REST API Documentation](#interactive-swagger-ui--rest-api-documentation)
+  - [Swagger UI Web Explorer](#swagger-ui-web-explorer)
   - [POST /api/v1/calculate](#post-apiv1calculate-primary-endpoint)
   - [POST /api/v1/operations/{op}](#convenience-endpoints)
   - [GET /api/v1/health](#get-apiv1health)
@@ -38,17 +40,19 @@ This project follows clean code principles, separation of concerns, and idiomati
 ```
 ┌────────────────────────────────────────────────────────┐
 │                   React 19 Frontend                    │
-│   • Vite + TypeScript                                  │
-│   • Custom useCalculator State Hook                    │
+│   • Material You / Android Calculator Aesthetic        │
+│   • Circular Buttons & Soft Pastel Tonal Colors        │
+│   • Custom useCalculator State Hook with Closure Safety│
 │   • Full Keyboard & Numpad Listener                    │
 │   • Persistent Session History (localStorage)          │
-│   • Vitest + React Testing Library (17 Unit Tests)     │
+│   • Vitest + React Testing Library (18 Unit Tests)     │
 └───────────────────────────┬────────────────────────────┘
                             │ HTTP JSON / REST
                             ▼
 ┌────────────────────────────────────────────────────────┐
 │                   Go REST Microservice                 │
 │   • Standard net/http (Zero Heavy Framework bloat)     │
+│   • Interactive Swagger UI (/swagger) & OpenAPI 3.0    │
 │   • Domain Service Layer (internal/calculator)         │
 │   • HTTP Handlers with JSON validation & status codes  │
 │   • Middleware (CORS & structured request logger)      │
@@ -64,13 +68,18 @@ This project follows clean code principles, separation of concerns, and idiomati
 - **Arithmetic Operations**:
   - **Basic**: Addition (`+`), Subtraction (`−`), Multiplication (`×`), Division (`÷`).
   - **Advanced**: Exponentiation (`xʸ` / `^`), Square Root (`√`), Percentage (`%`).
-- **Interactive Modern UI**:
-  - Glassmorphism dark theme with clear visual hierarchy.
-  - Operation chaining (e.g. `10 + 5 × 2`).
-  - Backspace (`⌫`), Clear All (`AC`), and Sign Toggle (`±`).
-  - Live backend connection health status indicator.
-- **Physical Keyboard Support**:
-  - Type directly with your keyboard or numpad (`0-9`, `.`, `+`, `-`, `*`, `/`, `^`, `%`, `Enter`, `Backspace`, `Esc`).
+- **Interactive UI (Guided by Google / Android Calculator Reference)**:
+  - **Circular Buttons**: Ergonomic circular touch targets with subtle tactile feedback.
+  - **Soft Pastel Tonal Colors**: Soft mint green for `AC`, pastel periwinkle blue for arithmetic operators, warm off-white for numeric keys, and soft dusty rose/pink for `=`.
+  - **Dual-Line Display**: Prominent top expression line with large bold typography and a secondary live result line.
+  - **Top Function Bar**: Secondary shortcut row for advanced mathematical functions (`√`, `^`, `%`, `±`).
+  - **Active Operator Highlighting**: Selected pending operator glows with an active indicator.
+  - **Operation Chaining**: Smoothly evaluates expressions sequentially (e.g. `10 + 5 × 2`).
+  - **Backspace (`⌫`), Clear All (`AC`), and Sign Toggle (`±`)**.
+- **Interactive Swagger UI**:
+  - Embedded Swagger UI explorer at `/swagger` with live "Try it out" capabilities.
+- **Physical Keyboard & Numpad Support**:
+  - Type directly with your keyboard (`0-9`, `.`, `+`, `-`, `*`, `/`, `^`, `%`, `Enter`, `Backspace`, `Esc`).
 - **Calculation History**:
   - Stores recent calculations with timestamp, mathematical equation, and final result.
   - One-click reloading of previous results into the active display.
@@ -450,6 +459,10 @@ curl -X POST http://localhost:8080/api/v1/calculate \
    Rapid keyboard typing can cause React closure staleness when relying solely on asynchronous state updates. The `useCalculator` hook pairs `useRef` and `useState` to guarantee synchronous tracking of entry transitions without missing keystrokes.
 5. **Session History Persistence**:
    Calculations are stored in `localStorage` so users retain recent calculations across page reloads.
+6. **UI/UX Guided by Android Calculator (Circular Buttons & Soft Pastel Tones)**:
+   The user interface was specifically designed following a visual reference of modern mobile calculators (Google / Android Material You). It features ergonomic circular buttons (`circle-key`), an elegant soft pastel color palette (mint green for Clear/AC, periwinkle blue for arithmetic operators, warm off-white for digits, and dusty rose for equals), active operator state highlighting, and an intuitive dual-line display showing the running expression alongside the calculated output.
+7. **Single Unified API Documentation via Swagger UI (OpenAPI 3.0)**:
+   To avoid redundant or fragmented documentation files, the REST API is documented interactively via OpenAPI 3.0 embedded natively in the Go binary (`http://localhost:8080/swagger`). Root navigation routes (`/`, `/api`, `/api/v1`) gracefully redirect to Swagger UI, providing an interactive, live-testing sandbox with clear schema definitions.
 
 ---
 
