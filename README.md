@@ -33,42 +33,61 @@ A modern, production-grade full-stack calculator application featuring a **Go RE
 
 ---
 
-## Architecture & Design Rationale
+## Architecture & Design Rationale (C4 Model)
 
-This project follows clean code principles, separation of concerns, and idiomatic patterns in both Go and TypeScript:
+This project adopts the **C4 Model** for architectural visualization, focusing on a clean separation of concerns and an intuitive, direct understanding of how a request flows through the system.
 
-```
-┌────────────────────────────────────────────────────────┐
-│                   React 19 Frontend                    │
-│   • Material You / Android Calculator Aesthetic        │
-│   • Circular Buttons & Soft Pastel Tonal Colors        │
-│   • Custom useCalculator State Hook with Closure Safety│
-│   • Full Keyboard & Numpad Listener                    │
-│   • Persistent Session History (localStorage)          │
-│   • Vitest + React Testing Library (18 Unit Tests)     │
-└───────────────────────────┬────────────────────────────┘
-                            │ HTTP JSON / REST
-                            ▼
-┌────────────────────────────────────────────────────────┐
-│                   Go REST Microservice                 │
-│   • Standard net/http (Zero Heavy Framework bloat)     │
-│   • Interactive Swagger UI (/swagger) & OpenAPI 3.0    │
-│   • Domain Service Layer (internal/calculator)         │
-│   • HTTP Handlers with JSON validation & status codes  │
-│   • Middleware (CORS & structured request logger)      │
-│   • IEEE-754 floating-point precision sanitization     │
-│   • 96% Test Statement Coverage (Table-Driven Tests)   │
-└────────────────────────────────────────────────────────┘
+### 1. C4 Container Diagram (Level 2)
+
+```mermaid
+graph LR
+    User(["👤 Usuario / Evaluador<br/>[Persona]"])
+    
+    subgraph DockerCompose ["🐳 Entorno Docker Compose"]
+        Frontend["💻 Aplicación Web SPA<br/>[React 19 + TypeScript + Nginx]<br/>:3000"]
+        Backend["⚙️ Microservicio REST<br/>[Go 1.22+ net/http]<br/>:8080"]
+        Swagger["📖 Swagger UI / OpenAPI<br/>[Docs Embebidas]<br/>:8080/swagger"]
+    end
+    
+    Storage[("💾 LocalStorage<br/>[Browser]")]
+
+    User -->|"1. Clics / Teclado físico"| Frontend
+    Frontend -->|"2. POST /api/v1/calculate [HTTP/JSON]"| Backend
+    Backend -.->|"Expone documentación"| Swagger
+    Frontend -.->|"Persiste historial"| Storage
 ```
 
-### Visual Architecture Diagrams (`architecture.drawio`)
+### 2. C4 Dynamic Diagram: Flujo Directo de una Petición
 
-The project includes an interactive, multi-sheet diagram file ready to open in **[draw.io (diagrams.net)](https://app.diagrams.net/)** or the **VS Code Draw.io Integration** extension:
-- **File location**: [`architecture.drawio`](./architecture.drawio) (also mirrored in [`docs/architecture.drawio`](./docs/architecture.drawio))
-- **Sheets included**:
-  1. **1. System & Container Architecture**: Docker Compose network, Nginx static host, React 19 component hierarchy, REST HTTP/JSON bridge, and Go microservice layers.
-  2. **2. Request & Data Flow Sequence**: Step-by-step lifecycle from physical keystroke, `useCalculator` hook, HTTP request/response cycle, to Go domain calculation and local storage sync.
-  3. **3. Backend Clean Architecture**: Layered separation of concerns between `cmd/api`, `internal/middleware`, `internal/handler`, and pure `internal/calculator` domain engine.
+Este diagrama ilustra de forma directa y sin sobrecarga el ciclo de vida de una operación matemática (por ejemplo: `50 + 25 =`):
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as 👤 Usuario
+    participant UI as 💻 Interfaz React (Keypad/Display)
+    participant Hook as 🧠 useCalculator Hook
+    participant API as ⚙️ Go REST API (:8080)
+    participant Engine as 🧮 Motor de Dominio (Go)
+
+    User->>UI: Escribe "50 + 25 =" (pantalla o teclado físico)
+    UI->>Hook: Captura evento y prepara operación
+    Hook->>API: HTTP POST /api/v1/calculate {"operation": "add", "a": 50, "b": 25}
+    Note over API: Logger registra latencia y CORS valida origen
+    API->>Engine: calculator.Add(50, 25)
+    Note over Engine: Ejecuta suma y sanitiza precisión flotante
+    Engine-->>API: Retorna resultado exacto: 75.0
+    API-->>Hook: HTTP 200 OK {"success": true, "result": 75}
+    Hook->>UI: Actualiza pantalla principal a "75" y guarda en LocalStorage
+    UI-->>User: Renderiza "75" en negrita con fórmula histórica "50 + 25 ="
+```
+
+### Diagramas Editables en Draw.io (`architecture.drawio`)
+
+El archivo **[`architecture.drawio`](./architecture.drawio)** (y su espejo en **[`docs/architecture.drawio`](./docs/architecture.drawio)**) ha sido rediseñado siguiendo el estándar C4 para ser visualmente limpio, directo y fácil de entender. Puedes abrirlo directamente en **[draw.io (diagrams.net)](https://app.diagrams.net/)** o en VS Code:
+
+- **Página 1: `1. C4 - Diagrama de Contenedores`**: Muestra los contenedores del sistema (Frontend React en puerto 3000, Backend Go en puerto 8080, Swagger UI y LocalStorage) con estilos oficiales C4 en azul y verde.
+- **Página 2: `2. C4 - Flujo de una Petición`**: Representa el recorrido horizontal de 6 pasos claros desde la entrada del usuario hasta la respuesta 200 OK y el renderizado final.
 
 ---
 
