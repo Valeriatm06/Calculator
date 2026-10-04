@@ -204,10 +204,9 @@ func (h *CalculatorHandler) Index(w http.ResponseWriter, r *http.Request) {
     <h1><span>Calculator REST API</span> <span class="badge">Online (v1.0.0)</span></h1>
     <p>Welcome to the Go Calculator Microservice API. The following endpoints are available:</p>
 
-    <div class="endpoint">
-      <div><span class="method">GET</span> <code>/api/v1/health</code></div>
-      <p>Health check probe to verify API status.</p>
-      <a href="/api/v1/health" class="btn" target="_blank">Test Health Endpoint</a>
+    <div style="margin: 1.5rem 0 2rem 0;">
+      <a href="/swagger" class="btn" style="background: #10b981; margin-right: 8px; font-weight: 600;">⚡ Open Swagger UI</a>
+      <a href="/api/v1/health" class="btn" target="_blank">Check /health JSON</a>
     </div>
 
     <div class="endpoint">
@@ -240,6 +239,8 @@ func (h *CalculatorHandler) Index(w http.ResponseWriter, r *http.Request) {
 		"version": "1.0.0",
 		"status":  "healthy",
 		"endpoints": map[string]string{
+			"swagger_ui":  "GET /swagger",
+			"swagger_spec": "GET /swagger.json",
 			"health":      "GET /api/v1/health",
 			"calculate":   "POST /api/v1/calculate",
 			"operations":  "POST /api/v1/operations/{add,subtract,multiply,divide,power,sqrt,percentage}",
@@ -250,6 +251,13 @@ func (h *CalculatorHandler) Index(w http.ResponseWriter, r *http.Request) {
 
 // RegisterRoutes registers all calculator routes onto an http.ServeMux.
 func (h *CalculatorHandler) RegisterRoutes(mux *http.ServeMux) {
+	// Swagger UI & OpenAPI Specification routes
+	mux.HandleFunc("GET /swagger", h.SwaggerUI)
+	mux.HandleFunc("GET /swagger/", h.SwaggerUI)
+	mux.HandleFunc("GET /docs", h.SwaggerUI)
+	mux.HandleFunc("GET /swagger.json", h.SwaggerJSON)
+	mux.HandleFunc("GET /api/v1/swagger.json", h.SwaggerJSON)
+
 	// Root and API index documentation routes
 	mux.HandleFunc("GET /{$}", h.Index)
 	mux.HandleFunc("GET /api", h.Index)

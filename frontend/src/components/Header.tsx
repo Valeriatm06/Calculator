@@ -13,11 +13,11 @@ export const Header: React.FC<HeaderProps> = ({ apiStatus }) => {
       </div>
 
       <a
-        href="http://localhost:8080"
+        href="http://localhost:8080/swagger"
         target="_blank"
         rel="noreferrer"
         className={`status-badge ${apiStatus === 'offline' ? 'error' : ''}`}
-        title="Click to open API documentation"
+        title="Click to open Swagger UI documentation"
         data-testid="api-status-badge"
         style={{ textDecoration: 'none', cursor: 'pointer' }}
       >

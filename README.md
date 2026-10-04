@@ -239,6 +239,16 @@ npm test
 
 ## REST API Documentation & Examples
 
+### ⚡ Interactive Swagger UI & OpenAPI 3.0 Documentation
+
+The microservice includes an embedded **Swagger UI** for interactive exploration and testing:
+- **Swagger UI Web Interface**: [http://localhost:8080/swagger](http://localhost:8080/swagger)
+- **OpenAPI 3.0 JSON Specification**: [http://localhost:8080/swagger.json](http://localhost:8080/swagger.json)
+
+Click **"Try it out"** on any endpoint directly in Swagger to execute live test calculations against the backend!
+
+---
+
 ### POST `/api/v1/calculate` (Primary Endpoint)
 
 Performs an arithmetic calculation.
