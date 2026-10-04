@@ -1,12 +1,6 @@
 # Full-Stack Calculator Application (React + Go)
 
-[![Go Tests](https://img.shields.io/badge/Go_Backend_Coverage-96%25-brightgreen.svg)]()
-[![Frontend Tests](https://img.shields.io/badge/React_Tests-18_Passing-blue.svg)]()
-[![API Docs](https://img.shields.io/badge/API_Docs-Swagger_UI-85EA2D.svg?logo=swagger&logoColor=black)](http://localhost:8080/swagger)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue.svg)]()
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)]()
-
-A modern, production-grade full-stack calculator application featuring a **Go REST API microservice** and a **React 19 (TypeScript) frontend**. Built as part of the technical evaluation for **Sezzle**.
+A full-stack calculator application featuring a **Go REST API microservice** and a **React 19 (TypeScript) frontend**. Built as part of the technical evaluation for **Sezzle**.
 
 ---
 
