@@ -9,10 +9,7 @@ export const Header: React.FC<HeaderProps> = ({ apiStatus }) => {
     <header className="app-header">
       <div className="brand-section">
         <div className="brand-icon">∑</div>
-        <div>
-          <span className="brand-title">FullStack Calc</span>
-          <span className="brand-badge" style={{ marginLeft: '8px' }}>Go + React</span>
-        </div>
+        <span className="brand-title">Calculator</span>
       </div>
 
       <div

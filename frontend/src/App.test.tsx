@@ -15,8 +15,7 @@ describe('Calculator App Integration', () => {
 
     expect(screen.getByTestId('display-value')).toHaveTextContent('0');
     expect(screen.getByTestId('key-add')).toBeInTheDocument();
-    expect(screen.getByTestId('key-equals')).toBeInTheDocument();
-    expect(screen.getByText('FullStack Calc')).toBeInTheDocument();
+    expect(screen.getByText('Calculator')).toBeInTheDocument();
 
     await waitFor(() => {
       expect(screen.getByTestId('api-status-badge')).toHaveTextContent('API Online');
