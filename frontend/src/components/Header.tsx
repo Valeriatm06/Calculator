@@ -12,16 +12,20 @@ export const Header: React.FC<HeaderProps> = ({ apiStatus }) => {
         <span className="brand-title">Calculator</span>
       </div>
 
-      <div
+      <a
+        href="http://localhost:8080"
+        target="_blank"
+        rel="noreferrer"
         className={`status-badge ${apiStatus === 'offline' ? 'error' : ''}`}
-        title={`API Status: ${apiStatus}`}
+        title="Click to open API documentation"
         data-testid="api-status-badge"
+        style={{ textDecoration: 'none', cursor: 'pointer' }}
       >
         <span
           className={`status-dot ${apiStatus === 'offline' ? 'error' : ''}`}
         />
         <span>{apiStatus === 'online' ? 'API Online' : apiStatus === 'offline' ? 'API Offline' : 'Connecting...'}</span>
-      </div>
+      </a>
     </header>
   );
 };
