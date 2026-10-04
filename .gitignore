@@ -1,0 +1,30 @@
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build artifacts
+dist/
+build/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+calculator-api
+
+# Logs & Test reports
+*.log
+coverage/
+coverage.out
+*.test
+
+# Environment & IDE
+.env
+.env.local
+.vscode/
+.idea/
